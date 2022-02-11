@@ -5,25 +5,34 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-	public TextMeshProUGUI textDisplayLetter;
 	public TMP_InputField inputFieldToGetName;
 	public RectTransform textContainer;
 	public GameObject textToSpawn;
 	
-	private string[] _alphabet = new string[26] {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
+	public List<string> playerNames;
 
-	public List<string> _playerNames;
+	public GameObject panelMenu, panelGameOne;
 	
-	// Start is called before the first frame update
-    void Start()
-    {
-	  /*  int letterChoose = Random.Range(0, _alphabet.Length);
-	    textDisplayLetter.text = _alphabet[letterChoose];*/
-    }
+	#region Singleton
 
-    public void OnClickToAddPlayer()
+	private static GameManager _gameManager;
+
+	public static GameManager Instance => _gameManager;
+	// Start is called before the first frame update
+
+	private void Awake()
+	{
+		_gameManager = this;
+		
+	}
+
+	#endregion
+	
+	
+	
+	public void OnClickToAddPlayer()
     {
-	    _playerNames.Add(inputFieldToGetName.text);
+	    playerNames.Add(inputFieldToGetName.text);
 
 	    GameObject textSpawned = Instantiate(textToSpawn, textContainer);
 	    textSpawned.GetComponent<TextMeshProUGUI>().text = inputFieldToGetName.text;
@@ -34,10 +43,11 @@ public class GameManager : MonoBehaviour
 	   
 	    inputFieldToGetName.text = "";
     }
-    
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+	public void LaunchGame()
+	{
+		panelMenu.SetActive(false);
+		panelGameOne.SetActive(true);
+	}
+   
 }
