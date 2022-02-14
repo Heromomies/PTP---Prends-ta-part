@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using I2.Loc;
 using TMPro;
 using UnityEngine;
@@ -14,20 +11,31 @@ public class ReplaceWord : MonoBehaviour
     private float _time;
     public GameObject textDisplayWord;
     public TextMeshProUGUI textDisplayPlayerName;
-    
+
+    public GameObject panelEnd;
     private bool _isTiming;
-    
+
+    private void Start()
+    {
+        ChangeWordAndPlayerName();
+    }
+
     // Start is called before the first frame update
-    void Start()
+    void ChangeWordAndPlayerName()
     {
         var localManager = textDisplayWord.GetComponent<LocalizationParamsManager>();
         var randomWord = Random.Range(0, HashWord.Instance.wordHashes.Count);
         
         localManager.SetParameterValue("WORD", HashWord.Instance.wordHashes[randomWord]);
-
+        HashWord.Instance.wordHashes.Remove(HashWord.Instance.wordHashes[randomWord]);
+        
+        
         var randomPlayer = Random.Range(0, GameManager.Instance.playerNames.Count);
 
         textDisplayPlayerName.text = GameManager.Instance.playerNames[randomPlayer];
+
+        GameManager.Instance.playerNames.Remove(GameManager.Instance.playerNames[randomPlayer]);
+        
         _isTiming = true;
     }
 
@@ -41,13 +49,21 @@ public class ReplaceWord : MonoBehaviour
         
         if (_time >= timeToSpeak)
         {
-            EndGame();
+            panelEnd.SetActive(true);
+        }
+
+        if (GameManager.Instance.playerNames.Count == 0 || HashWord.Instance.wordHashes.Count == 0)
+        {
+            Debug.Log("Le jeu est fini");
         }
     }
 
-    void EndGame()
+    public void EndGame()
     {
         _isTiming = false;
-        //TODO end of the game
+        _time = 0;
+        
+        ChangeWordAndPlayerName();
+        panelEnd.SetActive(false);
     }
 }
