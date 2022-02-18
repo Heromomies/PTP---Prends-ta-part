@@ -33,6 +33,23 @@ MonoBehaviour:
       - '{[WORD]}'
       Flags: 0000
       Languages_Touch: []
+    - Term: TEXT_PlayerName
+      TermType: 0
+      Description: 
+      Languages:
+      - '{[NAME]}'
+      - '{[NAME]}'
+      Flags: 0000
+      Languages_Touch: []
+    - Term: TEXT_SecondGamePlayer
+      TermType: 0
+      Description: 
+      Languages:
+      - "{[NAME]} et {[NAME]} vont devoir s'embrasser s'ils ne veulent pas prendre
+        5 gorg\xE9es"
+      - 
+      Flags: 0000
+      Languages_Touch: []
     CaseInsensitiveTerms: 0
     OnMissingTranslation: 1
     mTerm_AppName: 
@@ -48,7 +65,7 @@ MonoBehaviour:
     Google_WebServiceURL: https://script.google.com/macros/s/AKfycbz_2AETQB3icxJ941hSTrDVjW1TFcFF8PeHlGruNJeZLSrdCepbKNIqfM_bGkoSwafA/exec
     Google_SpreadsheetKey: 1nqJvIFx2St3SrRj0kjD_lrmLB7NsJL0ddX67cKJG3VE
     Google_SpreadsheetName: I2Loc PTP Localization
-    Google_LastUpdatedVersion: 1644580652071
+    Google_LastUpdatedVersion: 1645186189857
     Google_Password: change_this
     GoogleUpdateFrequency: 3
     GoogleInEditorCheckFrequency: 2

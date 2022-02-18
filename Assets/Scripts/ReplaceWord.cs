@@ -28,13 +28,15 @@ public class ReplaceWord : MonoBehaviour
         
         localManager.SetParameterValue("WORD", HashWord.Instance.wordHashes[randomWord]);
         HashWord.Instance.wordHashes.Remove(HashWord.Instance.wordHashes[randomWord]);
-        
-        
+
         var randomPlayer = Random.Range(0, GameManager.Instance.playerNames.Count);
-
-        textDisplayPlayerName.text = GameManager.Instance.playerNames[randomPlayer];
-
+        
+        var localManagerName = textDisplayPlayerName.GetComponent<LocalizationParamsManager>();
+        localManagerName.SetParameterValue("NAME", GameManager.Instance.playerNames[randomPlayer]);
         GameManager.Instance.playerNames.Remove(GameManager.Instance.playerNames[randomPlayer]);
+        
+        //textDisplayPlayerName.text = GameManager.Instance.playerNames[randomPlayer];
+       
         
         _isTiming = true;
     }
